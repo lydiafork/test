@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>demo</title>
+    </head>
+    <style>
+        #app {
+            font-size: 50px;
+        }
+        .source {
+            margin-top: 50px;
+            font-size: 50px;
+        }
+        p {
+            color: brown;
+        }
+    </style>
+    <body>
+        <div id="app">
+           {{message}}
+        </div>
+        <div class="source">
+            <p>Source:</p>
+                let app = new Vue({ <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;    el: '#app',  <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   return {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; message: 'Hello Vue!'<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                });<br>
+        </div>
+    </body>
+    <script src="assets/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            mounted() {
+                console.log(this.message);
+            },
+            data() {
+                return {
+                    message: 'Hello Vue!'
+                }
+            }
+        });
+    </script>
+</html>
