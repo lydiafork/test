@@ -78,7 +78,6 @@
             //准备游戏
             this.gameReady();
         },
-
         initBackground: function() {
             //背景
             var bgWidth = this.width * this.scale;
@@ -92,7 +91,6 @@
                 scaleY: this.height / bgImg.height
             }).addTo(this.stage);
         },
-
         initCurrentScore: function() {
             //当前分数
             this.currentScore = new Hilo.BitmapText({
@@ -100,7 +98,6 @@
                 glyphs: this.asset.numberGlyphs,
                 textAlign: 'center'
             }).addTo(this.stage);
-
             //设置当前分数的位置
             this.currentScore.x = this.width - this.currentScore.width >> 1;
             this.currentScore.y = 180;
@@ -121,8 +118,8 @@
             }).addTo(this.stage);
         },
         initPaddle: function() {
-            this.paddle = new Hilo.Graphics({width:200, height:20, x:(this.width >> 1) - 100, y:this.height - 20});
-            this.paddle.lineStyle(1, "#000").beginFill("#000").drawRect(0, 0, 200, 20).endFill().addTo(this.stage);
+            this.paddle = new Hilo.Graphics({width:200, height:50, x:(this.width >> 1) - 100, y:this.height - 20});
+            this.paddle.lineStyle(1, "#000").beginFill("#000").drawRect(0, 0, 200, 50).endFill().addTo(this.stage);
             Hilo.util.copy(this.paddle, Hilo.drag);
         },
         initScenes: function() {
@@ -178,13 +175,16 @@
             this.currentScore.setText(this.score);
             this.gameReadyScene.visible = true;
             this.bricks.init();
-            this.paddle.moveTo((this.width >> 1) - 100, this.height - 20);
+            // 允许点击事件
+            this.stage.on(Hilo.event.POINTER_START, this.onUserInput.bind(this));
         },
         gameStart: function() {
             this.state = 'playing';
             this.gameReadyScene.visible = false;
             // 挡板允许滑动
             this.paddle.startDrag([0, this.height - 20, this.width - 200, 0]);
+            // 废除点击事件
+            this.stage.off(Hilo.event.POINTER_START);
         },
         gameOver: function() {
             if (this.state !== 'over') {

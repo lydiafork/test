@@ -24,22 +24,23 @@
         // 碰撞
         collision: function(paddle){
             if(this.isDead) return;
+            let x = this.x + this.speedX;
+            let y = this.y + this.speedY;
             // 球与挡板碰撞
-            if (this.hitTestObject(paddle, true)) {
+            if (this.hitTestObject(paddle)) {
                 this.changeSpeedY(paddle);
-            } else if (this.y > this.groundY || this.y < 0) {
+                return;
+            }
+            if (x <= 0 || x >= this.groundX) {
+                this.speedX = -this.speedX;
+            } 
+            if (y > this.groundY || y < 0) {
                 // 球落地
                 this.isDead = true;
                 this.y = this.groundY;
                 this.x += this.speedX;
+                return;
             }
-            if (this.x <= 0 || this.x >= this.groundX) {
-                this.speedX = -this.speedX;
-            } 
-            //y轴坐标
-            var y = this.y + this.speedY;
-            // x轴坐标
-            var x = this.x + this.speedX;
             this.x = x; 
             this.y = y;
         },
@@ -49,7 +50,6 @@
                 this.speedX = deltaX * 0.15 + 1;
             }
             this.speedY = -this.speedY;
-          
             this.y += this.speedY;
             this.x += this.speedX;
         },
