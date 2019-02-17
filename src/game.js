@@ -102,21 +102,6 @@
             this.currentScore.x = this.width - this.currentScore.width >> 1;
             this.currentScore.y = 180;
         },
-        initBricks: function() {
-            this.bricks = new game.Bricks({
-                id: 'bricks',
-                width: this.width,
-            }).addTo(this.stage);
-        },
-        initBall: function() {
-            this.ball = new game.Ball({
-                id: 'ball',
-                startX: this.width >> 1,
-                startY: ( this.height >> 1 ) + 100,
-                groundX: this.width,
-                groundY: this.height,
-            }).addTo(this.stage);
-        },
         initPaddle: function() {
             this.paddle = new Hilo.Graphics({width:200, height:50, x:(this.width >> 1) - 100, y:this.height - 20});
             this.paddle.lineStyle(1, "#000").beginFill("#000").drawRect(0, 0, 200, 50).endFill().addTo(this.stage);
@@ -146,6 +131,21 @@
                 e.stopImmediatePropagation && e.stopImmediatePropagation();
                 this.gameReady();
             }.bind(this));
+        },
+        initBricks: function() {
+            this.bricks = new game.Bricks({
+                id: 'bricks',
+                width: this.width,
+            }).addTo(this.stage, this.gameOverScene.depth - 1);
+        },
+        initBall: function() {
+            this.ball = new game.Ball({
+                id: 'ball',
+                startX: this.width >> 1,
+                startY: ( this.height >> 1 ) + 100,
+                groundX: this.width,
+                groundY: this.height,
+            }).addTo(this.stage, this.gameOverScene.depth - 1);
         },
         onUserInput: function(e) {
             if (this.state !== 'over' && !this.gameOverScene.contains(e.eventTarget)) {

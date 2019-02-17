@@ -31,7 +31,7 @@
                 this.changeSpeedY(paddle);
                 return;
             }
-            if (x <= 0 || x >= this.groundX) {
+            if (x <= 0 || x >= this.groundX - 20) {
                 this.speedX = -this.speedX;
             } 
             if (y > this.groundY || y < 0) {
