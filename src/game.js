@@ -191,7 +191,7 @@
                 //设置当前状态为结束over
                 this.state = 'over';
                 // 停止挡板的拖曳状态
-                this.paddle.stopDrag();
+                // this.paddle.stopDrag();
                 //隐藏屏幕中间显示的分数
                 this.currentScore.visible = false;
                 //显示结束场景
